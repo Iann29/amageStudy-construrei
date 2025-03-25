@@ -86,7 +86,9 @@ const Header: React.FC = () => {
                 transition={{ duration: 0.5 }}
               >
                 <motion.div
+                  initial={{ rotate: 0, scale: 1 }}
                   whileHover={{ rotate: [0, -10, 10, -5, 0], scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   transition={{ duration: 0.5 }}
                   className="flex items-center"
                 >
