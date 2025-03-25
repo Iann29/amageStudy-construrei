@@ -1,0 +1,61 @@
+/* Estilos específicos para o componente BestSellersSection */
+
+/* Estilos para Swiper (ajuste as cores conforme sua paleta) */
+.mySwiper .swiper-button-next,
+.mySwiper .swiper-button-prev {
+  color: var(--color-primary-600); /* Use sua cor primária */
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  width: 40px; /* Ajuste tamanho se necessário */
+  height: 40px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.mySwiper .swiper-button-next:hover,
+.mySwiper .swiper-button-prev:hover {
+   background-color: rgba(255, 255, 255, 1);
+   color: var(--color-primary-700);
+}
+
+/* Esconde setas em telas muito pequenas se desejar */
+@media (max-width: 640px) {
+  .mySwiper .swiper-button-next,
+  .mySwiper .swiper-button-prev {
+    display: none;
+  }
+}
+
+.mySwiper .swiper-button-next::after,
+.mySwiper .swiper-button-prev::after {
+   font-size: 16px; /* Tamanho do ícone da seta */
+   font-weight: bold;
+}
+
+.mySwiper .swiper-pagination-bullet {
+  background-color: #cbd5e1; /* Cor secundária 300 */
+  opacity: 0.8;
+  transition: background-color 0.2s, transform 0.2s;
+  width: 8px;
+  height: 8px;
+}
+
+.mySwiper .swiper-pagination-bullet-active {
+  background-color: var(--color-primary-600); /* Cor primária 600 */
+  transform: scale(1.2);
+  opacity: 1;
+}
+
+/* Ajuste para paginação dinâmica se estiver usando */
+.mySwiper .swiper-pagination-bullets.swiper-pagination-horizontal {
+  bottom: 0px; /* Ajusta posição vertical das bolinhas */
+}
+
+/* Estilos adicionais específicos para o BestSellersSection */
+.product-thumbnail {
+  transition: transform 0.3s ease;
+}
+
+.product-thumbnail:hover {
+  transform: translateY(-5px);
+}

@@ -1,145 +1,134 @@
+// src/pages/HomePage/BestSellersSection.tsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FaStar, FaChevronRight, FaArrowRight } from 'react-icons/fa';
+import { FaArrowRight } from 'react-icons/fa';
 import getImageUrl from '../../utils/debugImages';
+import MinimalProductThumbnail from './MinimalProductThumbnail'; // <--- Importe o NOVO componente
 
-// Tipos
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation'; // Só navegação, sem paginação talvez?
+import 'swiper/css/free-mode'; // Para um scroll mais livre
+import '../../styles/components/BestSellersSection.css'; // Caminho atualizado para o arquivo CSS
+
+// Import required modules
+import { Navigation, FreeMode, Mousewheel } from 'swiper/modules'; // Usar FreeMode e Mousewheel
+
+// --- Interface e Dados (mantidos como antes, mas ProductCard não é mais usado aqui) ---
 interface ProductItem {
   id: string;
   name: string;
   price: number;
   originalPrice?: number;
-  rating: number;
+  rating: number; // Ainda pode ser útil para ordenar, mesmo sem mostrar
   reviews: number;
   img: string;
   tag?: string;
   unit?: string;
+  inStock?: boolean; // Adicionado para o botão Add
 }
-
-// Dados dos produtos
 const bestSellers: ProductItem[] = [
-  { id: '1', name: 'Cimento Super Forte 50kg - Marca Líder', price: 49.90, originalPrice: 55.00, rating: 4.5, reviews: 120, img: getImageUrl('/images/products/cimento-forte.jpg'), tag: 'Mais Vendido' },
-  { id: '2', name: 'Kit Chuveiro Moderno Cromado Ducha Luxo', price: 289.90, originalPrice: 350.00, rating: 4.8, reviews: 85, img: getImageUrl('/images/products/chuveiro-moderno.jpg'), tag: '-17%' },
-  { id: '3', name: 'Furadeira de Impacto Pro 750W 220V', price: 450.00, rating: 4.7, reviews: 210, img: getImageUrl('/images/products/furadeira-pro.jpg') },
-  { id: '4', name: 'Tinta Premium Acrílica Branco Neve 18L', price: 320.00, rating: 4.6, reviews: 150, img: getImageUrl('/images/products/tinta-premium.jpg') },
-  { id: '5', name: 'Porcelanato Calacatta Gold Polido 80x80cm', price: 119.90, unit: '/m²', rating: 4.9, reviews: 95, img: getImageUrl('/images/products/porcelanato-calacatta.jpg'), tag: 'Premium' },
-  { id: '6', name: 'Caixa d\'Água Fortlev 1000L', price: 499.00, originalPrice: 549.00, rating: 4.4, reviews: 112, img: getImageUrl('/images/products/caixa-fortlev.jpg'), tag: '-9%' },
-  { id: '7', name: 'Argamassa ACIII Cinza 20kg', price: 25.50, rating: 4.3, reviews: 180, img: getImageUrl('/images/products/argamassa-ac3.jpg') },
-  { id: '8', name: 'Conjunto Vaso Sanitário + Caixa Acoplada Smart', price: 699.00, originalPrice: 780.00, rating: 4.6, reviews: 77, img: getImageUrl('/images/products/vaso-smart.jpg'), tag: '-10%' },
+   // ... seus dados de bestSellers ...
+   // Adicione inStock: true/false para cada um se possível
+    { id: '1', name: 'Cimento Super Forte 50kg - Marca Líder', price: 49.90, originalPrice: 55.00, rating: 4.5, reviews: 120, img: getImageUrl('/images/products/cimento-forte.jpg'), tag: 'Mais Vendido', inStock: true },
+    { id: '2', name: 'Kit Chuveiro Moderno Cromado Ducha Luxo', price: 289.90, originalPrice: 350.00, rating: 4.8, reviews: 85, img: getImageUrl('/images/products/chuveiro-moderno.jpg'), tag: '-17%', inStock: true },
+    { id: '3', name: 'Furadeira de Impacto Pro 750W 220V', price: 450.00, rating: 4.7, reviews: 210, img: getImageUrl('/images/products/furadeira-pro.jpg'), inStock: true },
+    { id: '4', name: 'Tinta Premium Acrílica Branco Neve 18L', price: 320.00, rating: 4.6, reviews: 150, img: getImageUrl('/images/products/tinta-premium.jpg'), inStock: false }, // Exemplo esgotado
+    { id: '5', name: 'Porcelanato Calacatta Gold Polido 80x80cm', price: 119.90, unit: '/m²', rating: 4.9, reviews: 95, img: getImageUrl('/images/products/porcelanato-calacatta.jpg'), tag: 'Premium', inStock: true },
+    { id: '6', name: 'Caixa d\'Água Fortlev 1000L', price: 499.00, originalPrice: 549.00, rating: 4.4, reviews: 112, img: getImageUrl('/images/products/caixa-fortlev.jpg'), tag: '-9%', inStock: true },
+    { id: '7', name: 'Argamassa ACIII Cinza 20kg', price: 25.50, rating: 4.3, reviews: 180, img: getImageUrl('/images/products/argamassa-ac3.jpg'), inStock: true },
+    { id: '8', name: 'Conjunto Vaso Sanitário + Caixa Acoplada Smart', price: 699.00, originalPrice: 780.00, rating: 4.6, reviews: 77, img: getImageUrl('/images/products/vaso-smart.jpg'), tag: '-10%', inStock: true },
 ];
+
 
 const BestSellersSection: React.FC = () => {
   return (
-    <section className="py-16 md:py-20">
+    <section className="py-16 md:py-20 bg-gradient-to-b from-white to-secondary-50"> {/* Fundo suave */}
       <div className="container mx-auto px-4">
+        {/* Título da Seção */}
         <motion.div
-          className="text-center mb-12"
+          className="text-center mb-10" // Menos margem
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-secondary-800 mb-4">Produtos Mais Vendidos</h2>
-          <p className="text-lg text-secondary-600 max-w-3xl mx-auto">
-            Qualidade e preço justo para sua obra. Confira nossos produtos mais populares.
-          </p>
+          <h2 className="text-3xl md:text-4xl font-bold text-secondary-800 mb-3">MAIS VENDIDOS</h2> {/* Título mais direto */}
+           <div className="w-16 h-1 bg-primary-500 mx-auto mb-4"></div> {/* Linha decorativa */}
+          {/* <p>...</p>  Pode remover o parágrafo se quiser mais minimalista */}
         </motion.div>
 
-        {/* Slider de Produtos */}
+        {/* Swiper Horizontal Minimalista */}
         <motion.div
-          className="mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          className="mb-12 relative group/swiper" // group/swiper para controlar setas no hover
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <div className="product-swiper">
+          <Swiper
+            modules={[Navigation, FreeMode, Mousewheel]}
+            slidesPerView={'auto'} // Deixa o Swiper calcular baseado no width dos slides
+            spaceBetween={16} // Espaço menor entre os thumbs
+            freeMode={true} // Permite scroll "livre"
+            mousewheel={true} // Habilita scroll com a roda do mouse
+            navigation={{ // Configuração das setas
+              nextEl: '.swiper-button-next-bestsellers',
+              prevEl: '.swiper-button-prev-bestsellers',
+            }}
+            className="!py-2" // Padding vertical mínimo
+            breakpoints={{
+                // Não precisamos mais de breakpoints complexos se slidesPerView for 'auto'
+                // Mas podemos ajustar spaceBetween se quisermos
+                 768: {
+                     spaceBetween: 20,
+                 },
+                 1024: {
+                    spaceBetween: 24,
+                 }
+            }}
+          >
             {bestSellers.map((product) => (
-              <div key={product.id} className="h-full">
-                <div
-                  className="bg-white rounded-lg border border-gray-100 shadow-card overflow-hidden h-full flex flex-col"
-                >
-                  
-                  {/* Imagem do produto com marca d'água */}
-                  <div className="relative h-52 bg-white p-4 flex items-center justify-center">
-                    <img src={product.img} alt={product.name} className="max-h-full max-w-full object-contain" />
-                    
-                    {/* Tag de promoção ou destaque */}
-                    {product.tag && (
-                      <div className={`absolute top-2 right-2 py-1 px-3 rounded-md text-xs font-bold ${
-                        product.tag === 'Mais Vendido' 
-                          ? 'bg-primary-500 text-white' 
-                          : product.tag.startsWith('-') 
-                            ? 'bg-warning-500 text-white' 
-                            : 'bg-accent-600 text-white'
-                      }`}>
-                        {product.tag}
-                      </div>
-                    )}
-                  </div>
-                  
-                  <div className="p-4 flex-grow flex flex-col justify-between">
-                    {/* Nome e avaliação */}
-                    <div>
-                      <h3 className="font-medium text-secondary-800 line-clamp-2 mb-2 min-h-[2.5rem]">{product.name}</h3>
-                      
-                      <div className="flex items-center mb-3">
-                        <div className="flex text-warning-500">
-                          {[...Array(5)].map((_, i) => (
-                            <FaStar key={i} className={`w-4 h-4 ${i < Math.floor(product.rating) ? 'text-warning-500' : 'text-gray-300'}`} />
-                          ))}
-                        </div>
-                        <span className="text-xs text-secondary-500 ml-1">
-                          ({product.reviews})
-                        </span>
-                      </div>
-                    </div>
-                    
-                    {/* Preço e CTA */}
-                    <div>
-                      <div className="flex items-baseline mb-3">
-                        {product.originalPrice && (
-                          <span className="text-secondary-400 line-through text-sm mr-2">
-                            R$ {product.originalPrice.toFixed(2).replace('.', ',')}
-                          </span>
-                        )}
-                        <span className="text-xl font-bold text-primary-700">
-                          R$ {product.price.toFixed(2).replace('.', ',')}
-                          {product.unit && <span className="text-sm font-normal">{product.unit}</span>}
-                        </span>
-                      </div>
-                      
-                      <div className="flex items-center justify-between">
-                        <Link to={`/produtos/${product.id}`}>
-                          <button className="text-primary-600 hover:text-primary-700 text-sm font-medium underline-offset-2 hover:underline flex items-center transition-colors">
-                            Ver detalhes
-                            <FaChevronRight className="ml-1 text-xs" />
-                          </button>
-                        </Link>
-                        <button className="bg-primary-500 hover:bg-primary-600 text-white p-2 rounded-md shadow-button hover:shadow-md transition-all">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                          </svg>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <SwiperSlide key={product.id} className="!w-36 sm:!w-40 md:!w-44 lg:!w-48"> {/* Largura fixa para cada slide! */}
+                <MinimalProductThumbnail
+                  product={{ // Mapeando dados
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    imageUrl: product.img,
+                    rating: product.rating, // Passando mesmo sem usar no thumb base
+                    inStock: product.inStock ?? true, // Default para true se undefined
+                    tag: product.tag, // Passando a tag
+                    // description, category podem ser omitidos
+                  }}
+                />
+              </SwiperSlide>
             ))}
+          </Swiper>
+
+          {/* Botões de Navegação Customizados (aparecem no hover do container) */}
+          <div className="swiper-button-prev-bestsellers absolute top-1/2 -translate-y-1/2 left-0 z-10 cursor-pointer p-2 bg-white/50 rounded-full shadow-md opacity-0 group-hover/swiper:opacity-100 transition-opacity duration-300 hover:bg-white/80 -translate-x-3">
+             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-secondary-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
           </div>
+          <div className="swiper-button-next-bestsellers absolute top-1/2 -translate-y-1/2 right-0 z-10 cursor-pointer p-2 bg-white/50 rounded-full shadow-md opacity-0 group-hover/swiper:opacity-100 transition-opacity duration-300 hover:bg-white/80 translate-x-3">
+             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-secondary-700" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+          </div>
+
         </motion.div>
-        
+
         {/* Chamada para Ação - Catálogo Completo */}
-        <motion.div 
+        <motion.div
           className="text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
           <Link to="/produtos">
-            <button className="inline-flex items-center px-8 py-3 bg-secondary-700 hover:bg-secondary-800 text-white font-medium rounded-lg shadow-md transition-all duration-300 hover:shadow-lg">
+            <button className="inline-flex items-center px-6 py-2.5 border border-secondary-300 text-secondary-700 hover:bg-secondary-100 font-medium rounded-lg shadow-sm transition-all duration-300 text-sm">
               Ver Catálogo Completo
-              <FaArrowRight className="ml-2" />
+              <FaArrowRight className="ml-2 text-xs" />
             </button>
           </Link>
         </motion.div>
