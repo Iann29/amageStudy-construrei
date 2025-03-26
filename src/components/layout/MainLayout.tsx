@@ -10,9 +10,7 @@ const MainLayout: React.FC = () => {
       <div className="flex flex-col min-h-screen bg-gray-50">
         <Header />
         <main className="flex-grow">
-          <div className="container mx-auto px-4 py-8">
-            <Outlet />
-          </div>
+          <Outlet />
         </main>
         <Footer />
       </div>

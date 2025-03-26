@@ -10,21 +10,21 @@ import getImageUrl from '../../utils/debugImages';
 const HeroSection: React.FC = () => {
   return (
     <motion.section
-      className="relative min-h-[60vh] md:min-h-[75vh] flex items-center justify-center text-center overflow-hidden"
+      className="relative min-h-[60vh] md:min-h-[75vh] flex items-center justify-center text-center overflow-hidden hero-full-width"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration:.8 }}
     >
       {/* Background com imagem mais impactante de construção */}
-      <div className="absolute inset-0 z-0">
-         <img src={getImageUrl('/hero/construction-site-hero.jpg')} alt="Obra em Construção" className="w-full h-full object-cover"/>
+      <div className="absolute inset-0 z-0 w-full">
+         <img src={getImageUrl('/images/headerBack.webp')} alt="Obra em Construção" className="w-full h-full object-cover"/>
          {/* Overlay com gradiente que usa os novos tons da marca */}
          <div className="absolute inset-0 bg-gradient-to-t from-secondary-900/90 via-secondary-800/70 to-secondary-700/50"></div>
       </div>
 
       {/* Banner superior com credibilidade */}
-      <div className="absolute top-0 left-0 right-0 bg-primary-500 text-white py-2 z-10">
-        <div className="container mx-auto px-4">
+      <div className="absolute top-0 left-0 right-0 bg-primary-500 text-white py-2 z-10 w-full">
+        <div className="w-full px-0 flex justify-center">
           <div className="flex justify-center items-center text-sm md:text-base font-medium">
             <FaHardHat className="mr-2" /> 
             <span className="mr-2">ENTREGA PARA TODO BRASIL</span>
@@ -38,7 +38,7 @@ const HeroSection: React.FC = () => {
 
       {/* Conteúdo Hero */}
       <motion.div
-        className="relative z-10 container mx-auto px-4 text-white pt-16"
+        className="relative z-10 w-full px-0 text-white pt-16"
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.2 }}
@@ -66,7 +66,7 @@ const HeroSection: React.FC = () => {
 
         {/* Barra de Busca com Estilo Industrial */}
         <motion.div 
-          className="max-w-3xl mx-auto mb-10"
+          className="max-w-3xl w-full mx-auto mb-10 px-0"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.8 }}

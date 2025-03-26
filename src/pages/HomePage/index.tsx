@@ -9,14 +9,18 @@ import '../../styles/home.css';
 
 const HomePage: React.FC = () => {
   return (
-    <div className="bg-gray-50 text-gray-800">
+    <>
+      {/* HeroSection fora do container principal para ocupar toda a largura */}
       <HeroSection />
-      <BenefitsBar />
-      <CategoriesSection />
-      <BestSellersSection />
-      <TrustSection />
-      <CTASection />
-    </div>
+      
+      <div className="bg-gray-50 text-gray-800">
+        <BenefitsBar />
+        <CategoriesSection />
+        <BestSellersSection />
+        <TrustSection />
+        <CTASection />
+      </div>
+    </>
   );
 };
 

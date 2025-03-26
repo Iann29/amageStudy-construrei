@@ -24,6 +24,7 @@ const SPECIFIC_IMAGES: Record<string, string> = {
   '/images/hero-background.jpg': 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1200',
   '/images/hero-product.png': 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=400',
   '/images/expert-consultant.jpg': 'https://images.unsplash.com/photo-1574359411659-11a4dd9fd481?q=80&w=500',
+  '/images/headerBack.webp': '/images/headerBack.webp',
   
   // Novo hero da página inicial
   '/images/hero/modern-construction-site.jpg': 'https://images.unsplash.com/photo-1590076082844-9cb88f5ba07d?q=80&w=1920',
