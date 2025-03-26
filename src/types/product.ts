@@ -7,6 +7,10 @@ export interface Product {
   category?: string;
   inStock?: boolean;
   rating?: number;
+  originalPrice?: number;
+  reviewCount?: number;
+  tag?: string;
+  unit?: string;
 }
 
 export interface Category {

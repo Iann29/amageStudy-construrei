@@ -7,10 +7,18 @@ import Button from '../common/Button';
 interface ProductCardProps {
   product: Product;
   delay?: number;
+  showAddToCart?: boolean;
+  showQuickView?: boolean;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product, delay = 0 }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ 
+  product, 
+  delay = 0, 
+  showAddToCart = false,
+  showQuickView = false 
+}) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [showQuickViewModal, setShowQuickViewModal] = useState(false);
   
   return (
     <motion.div 
@@ -52,6 +60,37 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, delay = 0 }) => {
                   {product.category}
                 </span>
               </div>
+            )}
+            
+            {/* Quick view button - only shown on hover */}
+            {showQuickView && (
+              <AnimatePresence>
+                {isHovered && (
+                  <motion.div 
+                    className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-20 z-10"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <motion.button
+                      onClick={() => setShowQuickViewModal(true)}
+                      className="bg-white text-secondary-800 font-medium px-4 py-2 rounded-lg shadow-lg text-sm flex items-center"
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      exit={{ scale: 0.8, opacity: 0 }}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <svg className="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                      </svg>
+                      Visualizar
+                    </motion.button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             )}
             
             {/* Availability badge */}
@@ -157,38 +196,158 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, delay = 0 }) => {
           </div>
           
           {/* Add to cart button with micro-interaction */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: delay + 0.4 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Button
-              variant="primary"
-              size="sm"
-              onClick={() => {
-                console.log('Produto adicionado:', product.id);
-              }}
-              className="rounded-full relative overflow-hidden"
+          {showAddToCart && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: delay + 0.4 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <span className="flex items-center relative z-10">
-                <svg className="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-                Adicionar
-              </span>
-              <motion.div 
-                className="absolute inset-0 bg-primary-400"
-                initial={{ x: "-100%" }}
-                whileHover={{ x: 0 }}
-                transition={{ duration: 0.3 }}
-                style={{ opacity: 0.2 }}
-              />
-            </Button>
-          </motion.div>
+              <Button
+                variant="primary"
+                size="sm"
+                onClick={() => {
+                  console.log('Produto adicionado:', product.id);
+                }}
+                className="rounded-full relative overflow-hidden"
+              >
+                <span className="flex items-center relative z-10">
+                  <svg className="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                  Adicionar
+                </span>
+                <motion.div 
+                  className="absolute inset-0 bg-primary-400"
+                  initial={{ x: "-100%" }}
+                  whileHover={{ x: 0 }}
+                  transition={{ duration: 0.3 }}
+                  style={{ opacity: 0.2 }}
+                />
+              </Button>
+            </motion.div>
+          )}
         </div>
       </div>
+
+      {/* Quick View Modal */}
+      <AnimatePresence>
+        {showQuickViewModal && (
+          <motion.div
+            className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowQuickViewModal(false)}
+          >
+            <motion.div
+              className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-auto"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex justify-between items-center p-4 border-b">
+                <h3 className="text-xl font-bold text-secondary-800">{product.name}</h3>
+                <button 
+                  onClick={() => setShowQuickViewModal(false)}
+                  className="text-secondary-500 hover:text-secondary-700"
+                >
+                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+              <div className="p-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="aspect-square bg-secondary-100 rounded-lg overflow-hidden">
+                    <img 
+                      src={product.imageUrl} 
+                      alt={product.name} 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div>
+                    <div className="mb-4">
+                      <div className="flex items-baseline mb-2">
+                        <span className="text-2xl font-bold text-secondary-900">
+                          R$ {product.price.toFixed(2).replace('.', ',')}
+                          {product.unit && <span className="text-sm font-medium text-secondary-600 ml-1">{product.unit}</span>}
+                        </span>
+                        {product.originalPrice && (
+                          <span className="ml-2 text-sm text-secondary-500 line-through">
+                            R$ {product.originalPrice.toFixed(2).replace('.', ',')}
+                          </span>
+                        )}
+                      </div>
+                      {product.rating && (
+                        <div className="flex items-center mb-3">
+                          <div className="flex">
+                            {[1, 2, 3, 4, 5].map((star) => (
+                              <svg 
+                                key={star} 
+                                className={`w-5 h-5 ${star <= Math.floor(product.rating || 0) ? 'text-yellow-400' : 'text-gray-300'}`}
+                                fill="currentColor" 
+                                viewBox="0 0 20 20"
+                              >
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                              </svg>
+                            ))}
+                          </div>
+                          {product.reviewCount && (
+                            <span className="text-sm text-secondary-500 ml-2">
+                              ({product.reviewCount} avaliações)
+                            </span>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                    
+                    {product.description && (
+                      <div className="mb-6">
+                        <h4 className="text-sm font-semibold text-secondary-700 mb-2">Descrição</h4>
+                        <p className="text-secondary-600">{product.description}</p>
+                      </div>
+                    )}
+                    
+                    <div className="flex flex-col space-y-3">
+                      <Button
+                        variant="primary"
+                        size="md"
+                        onClick={() => {
+                          console.log('Produto adicionado:', product.id);
+                          setShowQuickViewModal(false);
+                        }}
+                        className="w-full"
+                      >
+                        <span className="flex items-center justify-center">
+                          <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                          </svg>
+                          Adicionar ao Carrinho
+                        </span>
+                      </Button>
+                      
+                      <Link to={`/produtos/${product.id}`} className="w-full">
+                        <Button
+                          variant="outline"
+                          size="md"
+                          className="w-full"
+                        >
+                          <span className="flex items-center justify-center">
+                            Ver Detalhes Completos
+                          </span>
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 };

@@ -9,14 +9,14 @@ const BenefitsBar: React.FC = () => {
       <div className="container mx-auto px-4">
         {/* Usar um grid que se adapta melhor em telas médias */}
         <motion.div
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-y-3 gap-x-6 text-center"
+          className="flex flex-wrap justify-center items-center gap-4 md:gap-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
           {/* Itens com ícones maiores e texto mais alinhado */}
           <motion.div 
-            className="flex items-center justify-center gap-2 p-2 text-sm text-gray-700 font-medium col-span-2 md:col-span-1 lg:col-span-1"
+            className="flex items-center justify-center gap-2 p-2 text-sm text-gray-700 font-medium"
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
@@ -40,7 +40,7 @@ const BenefitsBar: React.FC = () => {
             <span>+10.000 Produtos</span>
           </motion.div>
           <motion.div 
-            className="flex items-center justify-center gap-2 p-2 text-sm text-gray-700 font-medium col-span-2 md:col-span-1 lg:col-span-1"
+            className="flex items-center justify-center gap-2 p-2 text-sm text-gray-700 font-medium"
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
           >

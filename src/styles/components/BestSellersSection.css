@@ -1,61 +1,137 @@
 /* Estilos específicos para o componente BestSellersSection */
 
-/* Estilos para Swiper (ajuste as cores conforme sua paleta) */
-.mySwiper .swiper-button-next,
-.mySwiper .swiper-button-prev {
-  color: var(--color-primary-600); /* Use sua cor primária */
-  background-color: rgba(255, 255, 255, 0.8);
+.bestsellers-section {
+  background: linear-gradient(to bottom, #ffffff, #f8fafc);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Adiciona um elemento decorativo no fundo */
+.bestsellers-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(var(--color-primary-rgb), 0.1) 0%, rgba(var(--color-primary-rgb), 0) 70%);
+  z-index: 0;
   border-radius: 50%;
-  width: 40px; /* Ajuste tamanho se necessário */
-  height: 40px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  transition: background-color 0.2s, color 0.2s;
 }
 
-.mySwiper .swiper-button-next:hover,
-.mySwiper .swiper-button-prev:hover {
-   background-color: rgba(255, 255, 255, 1);
-   color: var(--color-primary-700);
+.bestsellers-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(var(--color-secondary-rgb), 0.1) 0%, rgba(var(--color-secondary-rgb), 0) 70%);
+  z-index: 0;
+  border-radius: 50%;
 }
 
-/* Esconde setas em telas muito pequenas se desejar */
-@media (max-width: 640px) {
-  .mySwiper .swiper-button-next,
-  .mySwiper .swiper-button-prev {
-    display: none;
-  }
+.section-header {
+  position: relative;
+  z-index: 1;
 }
 
-.mySwiper .swiper-button-next::after,
-.mySwiper .swiper-button-prev::after {
-   font-size: 16px; /* Tamanho do ícone da seta */
-   font-weight: bold;
+.products-carousel {
+  position: relative;
+  z-index: 1;
 }
 
-.mySwiper .swiper-pagination-bullet {
-  background-color: #cbd5e1; /* Cor secundária 300 */
-  opacity: 0.8;
-  transition: background-color 0.2s, transform 0.2s;
-  width: 8px;
-  height: 8px;
+/* Estilos para o Swiper */
+.bestsellers-swiper {
+  padding-bottom: 40px !important; /* Espaço para a paginação */
 }
 
-.mySwiper .swiper-pagination-bullet-active {
-  background-color: var(--color-primary-600); /* Cor primária 600 */
-  transform: scale(1.2);
+/* Botões de navegação */
+.bestsellers-swiper .swiper-button-next,
+.bestsellers-swiper .swiper-button-prev {
+  background-color: #ffffff;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  color: var(--color-primary-500);
+  transition: all 0.3s ease;
+}
+
+.bestsellers-swiper .swiper-button-next:hover,
+.bestsellers-swiper .swiper-button-prev:hover {
+  background-color: var(--color-primary-500);
+  color: white;
+  transform: scale(1.05);
+}
+
+.bestsellers-swiper .swiper-button-next::after,
+.bestsellers-swiper .swiper-button-prev::after {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Paginação */
+.bestsellers-swiper .swiper-pagination {
+  bottom: 0 !important;
+}
+
+.bestsellers-swiper .swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  background-color: #e2e8f0;
   opacity: 1;
+  transition: all 0.3s ease;
 }
 
-/* Ajuste para paginação dinâmica se estiver usando */
-.mySwiper .swiper-pagination-bullets.swiper-pagination-horizontal {
-  bottom: 0px; /* Ajusta posição vertical das bolinhas */
+.bestsellers-swiper .swiper-pagination-bullet-active {
+  background-color: var(--color-primary-500);
+  width: 30px;
+  border-radius: 5px;
 }
 
-/* Estilos adicionais específicos para o BestSellersSection */
-.product-thumbnail {
+/* Efeito de hover nos cards */
+.bestsellers-swiper .swiper-slide {
   transition: transform 0.3s ease;
 }
 
-.product-thumbnail:hover {
+.bestsellers-swiper .swiper-slide:hover {
   transform: translateY(-5px);
+}
+
+/* Botão de "Ver Catálogo Completo" */
+.view-all-products button {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.view-all-products button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.7s ease;
+  z-index: -1;
+}
+
+.view-all-products button:hover::before {
+  left: 100%;
+}
+
+/* Responsividade */
+@media (max-width: 640px) {
+  .bestsellers-swiper .swiper-button-next,
+  .bestsellers-swiper .swiper-button-prev {
+    display: none;
+  }
+  
+  .bestsellers-section::before,
+  .bestsellers-section::after {
+    width: 150px;
+    height: 150px;
+  }
 }

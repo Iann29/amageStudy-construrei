@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaChevronRight, FaArrowRight, FaTools, FaBolt, FaFaucet, FaPaintRoller, FaBuilding, FaWarehouse } from 'react-icons/fa';
-import getImageUrl from '../../utils/debugImages';
 
 // Tipos
 interface CategoryItem {
@@ -14,12 +13,12 @@ interface CategoryItem {
 
 // Dados das categorias
 const featuredCategories: CategoryItem[] = [
-  { name: 'Materiais Básicos', icon: FaWarehouse, link: '/produtos/basicos', img: getImageUrl('/images/categories/cat-basicos.jpg') },
-  { name: 'Elétrica', icon: FaBolt, link: '/produtos/eletrica', img: getImageUrl('/images/categories/cat-eletrica.jpg') },
-  { name: 'Hidráulica', icon: FaFaucet, link: '/produtos/hidraulica', img: getImageUrl('/images/categories/cat-hidraulica.jpg') },
-  { name: 'Ferramentas', icon: FaTools, link: '/produtos/ferramentas', img: getImageUrl('/images/categories/cat-ferramentas.jpg') },
-  { name: 'Acabamentos', icon: FaPaintRoller, link: '/produtos/acabamentos', img: getImageUrl('/images/categories/cat-acabamentos.jpg') },
-  { name: 'Estrutural', icon: FaBuilding, link: '/produtos/estrutural', img: getImageUrl('/images/categories/cat-estrutural.jpg') },
+  { name: 'Materiais Básicos', icon: FaWarehouse, link: '/produtos/basicos', img: '/images/materialbasico.webp' },
+  { name: 'Elétrica', icon: FaBolt, link: '/produtos/eletrica', img: '/images/eletrica.webp' },
+  { name: 'Hidráulica', icon: FaFaucet, link: '/produtos/hidraulica', img: '/images/hidraulica.webp' },
+  { name: 'Ferramentas', icon: FaTools, link: '/produtos/ferramentas', img: '/images/ferramentas.webp' },
+  { name: 'Acabamentos', icon: FaPaintRoller, link: '/produtos/acabamentos', img: '/images/acabamentos.webp' },
+  { name: 'Estrutural', icon: FaBuilding, link: '/produtos/estrutural', img: '/images/estrutural.webp' },
 ];
 
 const CategoriesSection: React.FC = () => {
