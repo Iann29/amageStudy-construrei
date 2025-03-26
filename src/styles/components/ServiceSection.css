@@ -1,0 +1,14 @@
+/* Estilos para o componente ServiceSection */
+
+/* Responsividade para o banner de serviços */
+@media (max-width: 640px) {
+  .service-item {
+    border-right: none;
+    border-bottom: 1px solid #f3f4f6;
+    padding: 12px 0;
+  }
+  
+  .service-item:last-child {
+    border-bottom: none;
+  }
+}

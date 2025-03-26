@@ -1,0 +1,22 @@
+/* Estilos para os componentes de Badge */
+
+/* Badge com efeito de gradiente */
+.premium-badge {
+  background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  color: white;
+  font-weight: 600;
+  font-size: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  box-shadow: 0 2px 5px rgba(var(--primary-700-rgb), 0.3);
+}
+
+.premium-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 500;
+}

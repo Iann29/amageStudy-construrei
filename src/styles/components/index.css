@@ -1,0 +1,12 @@
+/* Arquivo índice para importar todos os componentes CSS */
+
+@import './HeroSection.css';
+@import './ProductCard.css';
+@import './CategoryCard.css';
+@import './Button.css';
+@import './Badge.css';
+@import './BenefitSection.css';
+@import './CTASection.css';
+@import './ServiceSection.css';
+@import './BestSellersSection.css';
+@import './Utils.css';

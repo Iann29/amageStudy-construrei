@@ -5,7 +5,7 @@ import CategoriesSection from './CategoriesSection';
 import BestSellersSection from './BestSellersSection';
 import TrustSection from './TrustSection';
 import CTASection from './CTASection';
-import '../../styles/home.css';
+import '../../styles/components/index.css';
 
 const HomePage: React.FC = () => {
   return (
