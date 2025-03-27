@@ -76,7 +76,7 @@ const Header: React.FC = () => {
           : 'bg-gradient-to-r from-secondary-800 to-secondary-900 py-3'
       }`}>
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between">
+          <div className="header-container flex items-center justify-between">
             {/* Logo com efeito de capacete de construção */}
             <Link to="/" className="relative z-50">
               <motion.div 
@@ -109,14 +109,14 @@ const Header: React.FC = () => {
             </Link>
             
             {/* Barra de pesquisa com estilo industrial */}
-            <div className="hidden md:flex flex-1 max-w-xl mx-8">
+            <div className="hidden md:flex flex-1 max-w-xl mx-8 search-container">
               <div className="relative w-full">
                 <input
                   type="text"
                   placeholder="O que você procura hoje?"
-                  className="w-full py-2.5 pl-4 pr-12 rounded-lg border-2 border-secondary-200 focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none text-secondary-700 shadow-inner bg-white/95"
+                  className="w-full py-2.5 pl-4 pr-12 rounded-lg border-2 border-secondary-200 focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none text-secondary-700 shadow-inner bg-white/95 search-input"
                 />
-                <button className="absolute right-1.5 top-1/2 transform -translate-y-1/2 bg-primary-500 hover:bg-primary-600 text-white p-2 rounded-md transition-colors">
+                <button className="absolute right-1.5 top-1/2 transform -translate-y-1/2 bg-primary-500 hover:bg-primary-600 text-white p-2 rounded-md transition-colors search-button">
                   <FaSearch />
                 </button>
               </div>
@@ -134,17 +134,18 @@ const Header: React.FC = () => {
             </div>
             
             {/* Menu Desktop e ícones */}
-            <nav className="hidden md:flex items-center space-x-6">
+            <nav className="hidden md:flex items-center space-x-6 nav-menu">
               {navLinks.map((link, index) => (
                 <motion.div
                   key={link.path}
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: index * 0.1 + 0.3 }}
+                  className="flex items-center h-full"
                 >
                   <Link 
                     to={link.path} 
-                    className={`font-medium text-base relative group ${
+                    className={`font-medium text-base relative group nav-link ${
                       location.pathname === link.path 
                         ? (isScrolled ? 'text-primary-600' : 'text-primary-300') 
                         : (isScrolled ? 'text-secondary-700 hover:text-primary-600' : 'text-white/90 hover:text-white')
@@ -200,10 +201,10 @@ const Header: React.FC = () => {
         </div>
         
         {/* Categorias Navigation Bar - estilo industrial */}
-        <div className={`border-t ${isScrolled ? 'border-secondary-100 bg-white' : 'border-secondary-700 bg-secondary-800'} mt-2 transition-all duration-300`}>
+        <div className={`border-t ${isScrolled ? 'border-secondary-100 bg-white' : 'border-secondary-700 bg-secondary-800'} mt-2 transition-all duration-300 categories-bar`}>
           <div className="container mx-auto px-4">
             <div className="hidden md:flex items-center overflow-x-auto py-2">
-              <div className="flex items-center text-primary-500 font-semibold px-4 py-1 rounded-lg bg-secondary-100 mr-4">
+              <div className="flex items-center text-primary-500 font-semibold px-4 py-1 rounded-lg bg-secondary-100 mr-4 categories-button">
                 <FaTools className="mr-2" />
                 <span>CATEGORIAS</span>
                 <FaChevronDown className="ml-1 text-xs" />
@@ -214,7 +215,7 @@ const Header: React.FC = () => {
                   <Link 
                     key={category.path}
                     to={category.path}
-                    className={`px-3 py-1 rounded-lg transition-all duration-200 ${
+                    className={`px-3 py-1 rounded-lg transition-all duration-200 category-link ${
                       isScrolled 
                         ? 'text-secondary-600 hover:text-primary-500 hover:bg-secondary-50' 
                         : 'text-secondary-200 hover:text-white hover:bg-secondary-700'
@@ -225,7 +226,7 @@ const Header: React.FC = () => {
                 ))}
                 <Link 
                   to="/produtos"
-                  className={`px-3 py-1 rounded-lg transition-all duration-200 ${
+                  className={`px-3 py-1 rounded-lg transition-all duration-200 category-link ${
                     isScrolled 
                       ? 'text-primary-600 hover:bg-secondary-50' 
                       : 'text-primary-400 hover:bg-secondary-700'
@@ -254,9 +255,9 @@ const Header: React.FC = () => {
                   <input
                     type="text"
                     placeholder="O que você procura hoje?"
-                    className="w-full py-3 pl-4 pr-12 rounded-lg border-2 border-secondary-700 bg-secondary-700/30 focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none text-white placeholder-white/60"
+                    className="w-full py-3 pl-4 pr-12 rounded-lg border-2 border-secondary-700 bg-secondary-700/30 focus:border-primary-500 focus:ring-1 focus:ring-primary-500 outline-none text-white placeholder-white/60 search-input"
                   />
-                  <button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-primary-500 hover:bg-primary-600 text-white p-2 rounded-md transition-colors">
+                  <button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-primary-500 hover:bg-primary-600 text-white p-2 rounded-md transition-colors search-button">
                     <FaSearch />
                   </button>
                 </div>
@@ -289,7 +290,7 @@ const Header: React.FC = () => {
                       <Link
                         key={category.path}
                         to={category.path}
-                        className="bg-secondary-700/50 text-white py-2 px-3 rounded-lg text-sm hover:bg-secondary-700"
+                        className="bg-secondary-700/50 text-white py-2 px-3 rounded-lg text-sm hover:bg-secondary-700 flex items-center justify-center h-full"
                       >
                         {category.name}
                       </Link>

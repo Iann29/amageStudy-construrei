@@ -1,0 +1,7 @@
+/* Arquivo índice principal para importar todos os estilos */
+
+/* Importa os estilos de componentes */
+@import './components/index.css';
+
+/* Importa os estilos de layout */
+@import './layout/index.css';

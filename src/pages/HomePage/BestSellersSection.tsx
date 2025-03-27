@@ -34,14 +34,14 @@ interface ProductItem {
 }
 
 const bestSellers: ProductItem[] = [
-  { id: '1', name: 'Cimento Super Forte 50kg - Marca Líder', price: 49.90, originalPrice: 55.00, rating: 4.5, reviews: 120, img: getImageUrl('/images/products/cimento-forte.jpg'), tag: 'Mais Vendido', inStock: true, description: 'Cimento de alta resistência para obras estruturais' },
-  { id: '2', name: 'Kit Chuveiro Moderno Cromado Ducha Luxo', price: 289.90, originalPrice: 350.00, rating: 4.8, reviews: 85, img: getImageUrl('/images/products/chuveiro-moderno.jpg'), tag: '-17%', inStock: true, description: 'Ducha com acabamento cromado e jato ajustável' },
-  { id: '3', name: 'Furadeira de Impacto Pro 750W 220V', price: 450.00, rating: 4.7, reviews: 210, img: getImageUrl('/images/products/furadeira-pro.jpg'), inStock: true, description: 'Furadeira profissional com controle de velocidade' },
-  { id: '4', name: 'Tinta Premium Acrílica Branco Neve 18L', price: 320.00, rating: 4.6, reviews: 150, img: getImageUrl('/images/products/tinta-premium.jpg'), inStock: false, description: 'Tinta premium com acabamento fosco e alta cobertura' },
-  { id: '5', name: 'Porcelanato Calacatta Gold Polido 80x80cm', price: 119.90, unit: '/m²', rating: 4.9, reviews: 95, img: getImageUrl('/images/products/porcelanato-calacatta.jpg'), tag: 'Premium', inStock: true, description: 'Porcelanato de alto brilho inspirado no mármore italiano' },
-  { id: '6', name: 'Caixa d\'Água Fortlev 1000L', price: 499.00, originalPrice: 549.00, rating: 4.4, reviews: 112, img: getImageUrl('/images/products/caixa-fortlev.jpg'), tag: '-9%', inStock: true, description: 'Caixa d\'água de polietileno com tampa de encaixe' },
-  { id: '7', name: 'Argamassa ACIII Cinza 20kg', price: 25.50, rating: 4.3, reviews: 180, img: getImageUrl('/images/products/argamassa-ac3.jpg'), inStock: true, description: 'Argamassa flexível para áreas internas e externas' },
-  { id: '8', name: 'Conjunto Vaso Sanitário + Caixa Acoplada Smart', price: 699.00, originalPrice: 780.00, rating: 4.6, reviews: 77, img: getImageUrl('/images/products/vaso-smart.jpg'), tag: '-10%', inStock: true, description: 'Conjunto sanitário com sistema de duplo acionamento' },
+  { id: '1', name: 'Cimento Super Forte 50kg - Marca Líder', price: 49.90, originalPrice: 55.00, rating: 4.5, reviews: 120, img: '/images/productimages/tinta_premium_acrilica_branco_neve_18l.png', tag: 'Mais Vendido', inStock: true, description: 'Cimento de alta resistência para obras estruturais' },
+  { id: '2', name: 'Kit Chuveiro Moderno Cromado Ducha Luxo', price: 289.90, originalPrice: 350.00, rating: 4.8, reviews: 85, img: '/images/productimages/tinta_premium_acrilica_branco_neve_18l.png', tag: '-17%', inStock: true, description: 'Ducha com acabamento cromado e jato ajustável' },
+  { id: '3', name: 'Furadeira de Impacto Pro 750W 220V', price: 450.00, rating: 4.7, reviews: 210, img: '/images/productimages/tinta_premium_acrilica_branco_neve_18l.png', inStock: true, description: 'Furadeira profissional com controle de velocidade' },
+  { id: '4', name: 'Tinta Premium Acrílica Branco Neve 18L', price: 320.00, rating: 4.6, reviews: 150, img: '/images/productimages/tinta_premium_acrilica_branco_neve_18l.png', inStock: false, description: 'Tinta premium com acabamento fosco e alta cobertura' },
+  { id: '5', name: 'Porcelanato Calacatta Gold Polido 80x80cm', price: 119.90, unit: '/m²', rating: 4.9, reviews: 95, img: '/images/productimages/tinta_premium_acrilica_branco_neve_18l.png', tag: 'Premium', inStock: true, description: 'Porcelanato de alto brilho inspirado no mármore italiano' },
+  { id: '6', name: 'Caixa d\'Água Fortlev 1000L', price: 499.00, originalPrice: 549.00, rating: 4.4, reviews: 112, img: '/images/productimages/tinta_premium_acrilica_branco_neve_18l.png', tag: '-9%', inStock: true, description: 'Caixa d\'água de polietileno com tampa de encaixe' },
+  { id: '7', name: 'Argamassa ACIII Cinza 20kg', price: 25.50, rating: 4.3, reviews: 180, img: '/images/productimages/tinta_premium_acrilica_branco_neve_18l.png', inStock: true, description: 'Argamassa flexível para áreas internas e externas' },
+  { id: '8', name: 'Conjunto Vaso Sanitário + Caixa Acoplada Smart', price: 699.00, originalPrice: 780.00, rating: 4.6, reviews: 77, img: '/images/productimages/tinta_premium_acrilica_branco_neve_18l.png', tag: '-10%', inStock: true, description: 'Conjunto sanitário com sistema de duplo acionamento' },
 ];
 
 const BestSellersSection: React.FC = () => {
